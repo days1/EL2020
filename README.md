@@ -1,3 +1,11 @@
-# EL1998
+![](https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg)
 
-Hello, and welcome to Mr. Simons's repository for the spring 1998 embedded linux class.  This repository will be used as an example of ways to maintain a code base while working on a project. This is **NOT** the Embedded Linux class itself.  That is hosted on Google Classroom.  Please contact "simonsj [at] newpaltz [dot] edu" if you are in the class, but do not have the classroom code.
+#__Spring 2020 Embedded Linux Class__#.
+
+1. __Personal Information:__
+    Name: Sancho Day
+    Major: Computer Science
+    ID: ![N03844165](https://github.com/days1)
+    Year: Senior
+2. __Class Start Date:__ Jan 26, 2020
+3. __Class End Date:__ May 10, 2020 
