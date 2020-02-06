@@ -1,6 +1,6 @@
-###![](https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg)
+### ![](https://www.newpaltz.edu/media/identity/logos/newpaltzlogo.jpg)
 
-#__Spring 2020 Embedded Linux Class__#.
+# __Spring 2020 Embedded Linux Class__#.
 
 1. __Personal Information:__
     * Name: Sancho Day
