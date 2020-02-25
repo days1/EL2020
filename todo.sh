@@ -16,6 +16,9 @@ getList(){
 addToList(){
 	echo $taskToDo >> todo.txt
 }
+removeFromList(){
+	sed "$taskToRemove d" -i.bak todo.txt
+}
 
 PS3="Enter in one of the following commands: "
 
@@ -31,12 +34,20 @@ do
 			echo "--------------"
 			echo "Enter in what you need to do later"
 			read taskToDo
-			echo $taskToDo
 			addToList $taskToDo
 			echo $taskToDo has been added to the TO-DO List
 			echo "--------------"
 			;;
 		RemoveFromList)
+			echo "--------------"
+			getList
+			echo "Which task would you like to remove? Enter the number in which it appears in the list"
+			read taskToRemove
+			removeFromList $taskToRemove
+			echo "--------------"
+			echo Removed task \# $taskToRemove from the list
+			echo "--------------"
+			;;
 		Exit)
 			echo "Goodbye!"
 			exit 0
