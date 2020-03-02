@@ -14,7 +14,7 @@ blinkDur = .1
 blinkTime = 7
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(tempPin, GPIO.OUT)
+GPIO.setup(redPin, GPIO.OUT)
 GPIO.setup(touchPin, GPIO.IN)
 
 def oneBlink(pin):
