@@ -16,9 +16,10 @@ This command installs the Adafruit DHT Library.
 This script uses the DHT11 Temperature & Humidity Sensor Module and Adafruit DHT library in python
 to measure the temperature of the area.
 
-The code itself has two functions: oneBlink and readF   
-oneBlink makes the led blink to indicate that the touch sensor is being touched and that temp readings are taking place   
-readF reads in the temperature and has logic to convert it from celsius to fahrenheit.  
+The code itself has two functions: _oneBlink_ and _readF_   
+_oneBlink_ makes the led blink to indicate that the touch sensor is being touched and that temp readings are taking place   
+_readF_ reads in the temperature and has logic to convert it from celsius to fahrenheit.  
+
 The main portion of the code loops until the input of the touch sensor is triggered. The code then proceeds to use the two functions
 mentioned to read the temperature and output it to the terminal.
 
