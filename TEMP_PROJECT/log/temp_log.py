@@ -59,14 +59,14 @@ def readH(tempPin):
 	return tempHumid
 
 try:
-	with open("/home/sancho/CSP342/EL2020/TEMP_PROJECT/log/templog.csv", "a") as log:
-		while True:
-			time.sleep(60)
-			dataF = readF(tempPin)
-			dataH = readH(tempPin)
-			print(dataF)
-			print(dataH)
-			log.write("{0},{1},{2}\n".format(time.strftime("%Y-%m-%d %H:%M:%S"), str(dataF), str(dataH)))
+	while True:
+		time.sleep(60)
+		dataF = readF(tempPin)
+		dataH = readH(tempPin)
+		dateTime = time.strftime("%a_%d_%b_%Y_%H:%M:%S", time.localtime())
+		print(dataF)
+		print(dataH)
+		os.system('python writetodb.py {0} {1} {2}'.format(dateTime, str(dataF), str(dataH)))
 
 except KeyboardInterrupt:
 	os.system('clear')
