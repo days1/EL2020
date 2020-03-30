@@ -1,11 +1,11 @@
 import RPi.GPIO as GPIO
 
-redPin = 27
+greenPin = 25
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(redPin, GPIO.OUT)
+GPIO.setup(greenPin, GPIO.OUT)
 
-GPIO.output(redPin,True)
+GPIO.output(greenPin,True)
 time.sleep(.3)
 GPIO.output(redPin,False)
 

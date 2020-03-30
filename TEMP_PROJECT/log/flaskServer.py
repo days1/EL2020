@@ -29,7 +29,7 @@ def chartData():
 	with sql.connect('templogs.db') as con:
 		cur = con.cursor()
 		con.row_factory = sql.Row
-		cur.execute("SELECT Date, Temp FROM templogs WHERE Temp > 60")
+		cur.execute("SELECT Date, Temp FROM templogs WHERE Temp > 50")
 		dataset = cur.fetchall()
 		print (dataset)
 		chartData = []

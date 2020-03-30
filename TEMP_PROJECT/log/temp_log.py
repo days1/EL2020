@@ -1,11 +1,12 @@
 import Adafruit_DHT
+import sqlite3 as db
 import RPi.GPIO as GPIO
 import signal
 import time
 import os
 
 redPin = 27
-greenPin = 25 
+greenPin = 25
 tempPin = 17
 touchPin = 26
 
@@ -13,6 +14,8 @@ tempSensor = Adafruit_DHT.DHT11
 
 blinkDur = .1
 blinkTime = 7
+
+conn = None
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(redPin, GPIO.OUT)
@@ -58,17 +61,34 @@ def readH(tempPin):
 
 	return tempHumid
 
+def create_temp_log(conn, log):
+	sql = ''' INSERT INTO templogs(Date, Temp, Humidity)
+		VALUES(?,?,?); '''
+	cur = conn.cursor()
+	cur.execute(sql, log)
+	conn.commit()
+	print("Log inserted successfully into table")
+	return cur.lastrowid
+
 try:
 	while True:
 		time.sleep(60)
 		dataF = readF(tempPin)
 		dataH = readH(tempPin)
-		dateTime = time.strftime("%a_%d_%b_%Y_%H:%M:%S", time.localtime())
+		dateTime = time.strftime("%a %d %b %Y %H:%M:%S", time.localtime())
 		print(dataF)
 		print(dataH)
-		os.system('python writetodb.py {0} {1} {2}'.format(dateTime, str(dataF), str(dataH)))
+		conn = db.connect('templogs.db')
+		print("Connected to database")
+		log = (dateTime, dataF, dataH)
+		log_id = create_temp_log(conn, log)
 
 except KeyboardInterrupt:
 	os.system('clear')
 	print('Thanks for Blinking and Thinking')
 	GPIO.cleanup()
+
+finally:
+	if conn:
+		conn.close()
+		print("Database connection closed")
