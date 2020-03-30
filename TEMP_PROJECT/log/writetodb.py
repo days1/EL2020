@@ -8,7 +8,7 @@ humid = sys.argv[3]
 conn = None
 
 def create_temp_log(conn, log):
-	sql = ''' INSERT INTO templogs(date_time, Temp, Humidity)
+	sql = ''' INSERT INTO templogs(Date, Temp, Humidity)
 		VALUES(?,?,?);'''
 	cur = conn.cursor()
 	cur.execute(sql, log)
