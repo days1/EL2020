@@ -23,6 +23,7 @@ def index():
 @app.route("/blink")
 def blinkLed():
 	os.system('python blink.py')
+	return render_template('index.html')
 
 @app.route("/sqlData")
 def chartData():

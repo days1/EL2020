@@ -1,4 +1,5 @@
 import RPi.GPIO as GPIO
+import time
 
 greenPin = 25
 
@@ -7,7 +8,6 @@ GPIO.setup(greenPin, GPIO.OUT)
 
 GPIO.output(greenPin,True)
 time.sleep(.3)
-GPIO.output(redPin,False)
+GPIO.output(greenPin,False)
 
-except KeyboardInterrupt:
-	GPIO.cleanup()
+GPIO.cleanup()
