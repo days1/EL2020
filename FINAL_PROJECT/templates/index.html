@@ -7,24 +7,13 @@
 		<meta http-equiv="Pragma" content="no-cache" />
 		<meta http-equiv="Expires" content="0" />
 
-		<title>Raspberry Pi CO2 Monitor</title>
+		<title>Raspberry Pi CO Monitor</title>
 
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	</head>
 
 	<body onload="go()">
-
-		<center>
-			<div class='container'>
-			  <form action="/blink" method="get">
-		 	    <input type="submit" id='led' value="Blink LED">
-			  </form>
-			</div>
-			<div id="gauge" style="width: 250px; height: 250px"></div>
-			<div id="curve_chart" style="width: 1200px; height: 1200px"></div>
-		</center>
-
 		<script type='text/javascript'>
 			$(document).ready(function(){
 			  var $form = $('form');
@@ -69,11 +58,11 @@
 	        function drawChart() {
 				var gdata = new google.visualization.DataTable();
 				gdata.addColumn('date', 'Date');
-				gdata.addColumn('number', 'Temperature');
+				gdata.addColumn('number', 'CO Level');
 				gdata.addRows(chartData);
 
 				var options = {
-				    title: 'Temperture Log',
+				    title: 'CO Level Log',
 	            		    curveType: 'function',
 	            		    legend: { position: 'bottom' }
 	        		};

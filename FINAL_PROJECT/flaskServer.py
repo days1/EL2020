@@ -22,15 +22,15 @@ def index():
 
 @app.route("/sqlData")
 def chartData():
-	with sql.connect('co2.db') as con:
+	with sql.connect('COdb.db') as con:
 		cur = con.cursor()
 		con.row_factory = sql.Row
-		cur.execute("SELECT Date, CO2 FROM co2 WHERE CO2 > 50")
+		cur.execute("SELECT Date, Density FROM coRecords")
 		dataset = cur.fetchall()
 		print (dataset)
 		chartData = []
 		for row in dataset:
-			chartData.append({"Date": row[0], "CO2": float(row[1])})
+			chartData.append({"Date": row[0], "Density": float(row[1])})
 		return Response(json.dumps(chartData), mimetype='application/json')
 
 if __name__ == "__main__":
