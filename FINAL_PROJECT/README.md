@@ -72,7 +72,11 @@ The MQ7 Carbon Monoxide Detection Sensor will be using the ADC mentioned earlier
 
 Again, copy the _mq7_test.py_ script and run it. To test the sensor itself, I took a lighter and just pushed on the lever to let gas out of the lighter. This should pick up the gas when close enough to the sensor.  
 
-The remaining python scripts are additional functionality such as texting alerts and website displaying of the CO levels. If you're interested in setting up a database and display it via a website. Proceed to look at these resources.  
-[Flask Framework](http://mattrichardson.com/Raspberry-Pi-Flask/)
+### _smoke_co2.py_
+This file is the culmination of all the test scripts written. You can either copy this script yourself and run it to get the whole thing working or you can try piecing together all the test scripts and try it for yourself. In the end, your circuit board should look like this but hopefully less messy!  
+![alt test](https://i.ibb.co/sF03Qhf/IMG-20200514-191825.jpg)
+
+The remaining python scripts are additional functionality such as texting alerts and website displaying of the CO levels. If you're interested in setting up a database and website. Proceed to look at these resources.  
+[Flask Framework](http://mattrichardson.com/Raspberry-Pi-Flask/)  
 [SQLite tutorial](https://iotbytes.wordpress.com/sqlite-db-on-raspberry-pi/)
 
