@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import os, time, smtplib, socket, sys
+import sqlite3 as db
 
 # Initialize pin setup
 SPICLK = 11
@@ -55,9 +56,34 @@ def readadc(adcnum, clockpin, mosipin, misopin, cspin):
         adcout >>= 1       # first bit is 'null' so drop it
         return adcout
 
+# Stores reading record of CO level to the database
+def writeToDb(time, density):
+	conn = None
+	record = (time, density)
+	
+	try:
+		conn = db.connect('COdb.db')
+		print("Connected to Databse")
+
+		sql = ''' INSERT INTO coRecords(Date, Density)
+			VALUES(?,?);'''
+		cur = conn.cursor()
+		cur.execute(sql, record)
+		conn.commit()
+		print("CO reading has been recorded")
+		return cur.lastrowid
+	
+	except db.Error, e:
+		print ("Error %s:" %e.args[0])
+		sys.exit(1)
+
+	finally:
+		if conn:
+			conn.close()
+			print("Database connection closed")
+
 # Sends an alert if CO levels are abnormal
 def emailAlert(colevel):
-
 	msg = "Warning!!! CO levels are becoming dangerous! Current CO density is:" +str("%.2f"%((colevel/1024.)*100))+" %"
 
 	#SMTP Variables
@@ -74,21 +100,26 @@ def emailAlert(colevel):
 	print("Alert Sent")
 	time.sleep(5)
 
-#main ioop
+# Main loop 
 def main():
          init()
          print"Calibrating CO levels..."
          time.sleep(20)
          while True:
 		COlevel=readadc(mq7_apin, SPICLK, SPIMOSI, SPIMISO, SPICS)
-		
-		
+		density=((COlevel/1024.)*100)
+
+		dateTime = time.strftime("%a %d %b %Y %H:%M:%S", time.localtime())
+
+		writeToDb(dateTime, density)
+
                 if GPIO.input(mq7_dpin):
 			print("CO Levels Normal")
 			time.sleep(1)
                 else:
                         print("Abnormal amount of CO detected!")
-                        print"Current CO density is:" +str("%.2f"%((COlevel/1024.)*100))+" %"
+			print(density)
+                        print"Current CO density is:" +str("%.2f"%density+" %") #%((COlevel/1024.)*100))
 			emailAlert(COlevel)
                         time.sleep(1)
 
